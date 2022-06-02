@@ -13,7 +13,7 @@ def makedirs(path):
        if not os.path.isdir(path): 
            raise
 
-def start():
+def start(sigcv,tauv):
 
     makedirs('./images/result')
 
@@ -34,8 +34,9 @@ def start():
             edge = coherentLineDrawing.run(
                 img=img, sobel_size=3,
                 etf_iter=4, etf_size=6,
-                fdog_iter=4, sigma_c=0.3, rho=0.997, sigma_m=3.0,
-                tau=0.947
+                fdog_iter=4, sigma_c=sigcv, rho=0.997, sigma_m=3.0,
+                tau=tauv
+                # 0.3 / 0.947
             )
             # save result
             cv2.imwrite("./images/result/"+"image"+str(count)+".jpg", edge)     # save frame as JPG file
@@ -74,5 +75,3 @@ def start():
         # writing to a image array
         out.write(frame_array[i])
     out.release()
-
-
